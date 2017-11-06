@@ -1,18 +1,25 @@
 function randomInt(min,max) {
-  // create a range that includes min and max and return a random number from it
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function selectMole() {
-  // here you're going to find what mole is visible
-  // hide the visible mole
+  var visibleMole = $(".mole:visible")
 
-  // select a new mole to visible, making sure it isn't the same as the previous one
-  // and make the new mole visible
+  var moleNumber = randomInt(1,9)
+  var newMole = $('#mole-num-' + moleNumber)
+
+  while (visibleMole.attr("id") == newMole.attr("id")){
+    var moleNumber = randomInt(1,9)
+    var newMole = $('#mole-num-' + moleNumber)
+  }
+
+  visibleMole.hide("slide", { direction: 'down' })
+  newMole.show("slide", { direction: 'up' })
 }
 
-// the function below is called on game.js and calls on your selectMole() function every second
+
 function play() {
   setInterval(function() {
-    selectMole();
-  }, 1000);
+    selectMole()
+  }, 2000);
 }
